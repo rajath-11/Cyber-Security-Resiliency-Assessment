@@ -1,0 +1,119 @@
+<div class="identify-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <div class="progress-info">
+      <span class="step-number">{{ questionNumber }}</span>
+      <span class="total-questions">/ {{ totalQuestions }}</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Category Title -->
+    <div class="category-section">
+      <h2 class="category-title">{{ currentCategory }}</h2>
+      <p class="category-description">
+        Assess your organization's cybersecurity readiness in this category by answering the following question.
+      </p>
+    </div>
+
+    <!-- Question Section -->
+    <div class="question-section">
+      <h3 class="question-title">{{ currentQuestion.text }}</h3>
+      
+      <!-- Response Options -->
+      <div class="response-options">
+        <div class="response-option" 
+             *ngFor="let option of responseOptions"
+             [class.selected]="isResponseSelected(option)"
+             [style.border-color]="isResponseSelected(option) ? getResponseColor(option) : '#e5e7eb'"
+             (click)="selectResponse($any(option))">
+          
+          <!-- Icon -->
+          <div class="option-icon" [style.color]="getResponseColor(option)">
+            <span class="icon-symbol">{{ getResponseIcon(option) }}</span>
+          </div>
+          
+          <!-- Label -->
+          <div class="option-label">{{ option }}</div>
+          
+          <!-- Selected Indicator -->
+          <div class="selected-indicator" *ngIf="isResponseSelected(option)"
+               [style.background-color]="getResponseColor(option)">
+            ✓
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Section -->
+    <div class="navigation-section">
+      <div class="nav-buttons">
+        <button class="nav-btn prev-btn" 
+                [disabled]="!canGoPrevious"
+                (click)="previousQuestion()">
+          ← Previous
+        </button>
+        
+        <button class="nav-btn next-btn" 
+                *ngIf="!isLastQuestion"
+                [disabled]="!currentQuestion.response"
+                (click)="nextQuestion()">
+          Next →
+        </button>
+        
+        <button class="nav-btn submit-btn" 
+                *ngIf="isLastQuestion"
+                [disabled]="!allQuestionsAnswered"
+                (click)="onSaveAndContinue()">
+          Complete Assessment
+        </button>
+      </div>
+      
+      <!-- Progress Summary -->
+      <div class="progress-summary">
+        <span class="completed-count">{{ completedResponses }} of {{ totalQuestions }} questions answered</span>
+        <span class="readiness-score" *ngIf="completedResponses > 0">
+          Current Readiness Score: {{ getReadinessScore() }}%
+        </span>
+      </div>
+
+    </div>
+
+    <!-- Question Navigator -->
+    <div class="question-navigator">
+      <h4>Quick Navigation</h4>
+      <div class="question-dots">
+        <div class="question-dot" 
+             *ngFor="let question of questions; let i = index"
+             [class.current]="i === currentQuestionIndex"
+             [class.answered]="question.response !== null"
+             [title]="question.id + ': ' + (question.response || 'Not answered')"
+             (click)="goToQuestion(i)">
+          {{ i + 1 }}
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-actions">
+      <button 
+        type="button" 
+        class="btn btn-secondary"
+        (click)="onBack()">
+        Back
+      </button>
+      
+      <button 
+        type="button" 
+        class="btn btn-primary"
+        [disabled]="!allQuestionsAnswered"
+        (click)="onSaveAndContinue()">
+        Save & Continue
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="sidebar">
+  <div class="sidebar-header">
+    <div class="logo">
+      <span class="logo-icon">🔒</span>
+      <span class="logo-text">Cyber Security Resiliency Assessment</span>
+    </div>
+    <h2 class="sidebar-title">Take care of your cyber security</h2>
+    <p class="sidebar-subtitle">Follow the 8 simple steps to fill in your information so that we can offer you the best solution</p>
+  </div>
+
+  <div class="sidebar-content">
+    <div class="progress-steps" [style.--progress-percentage]="getProgressPercentage() + '%'">
+      <!-- Progress line connecting all steps -->
+      <div class="progress-line"></div>
+
+      <!-- Dynamic Steps using *ngFor -->
+      <div class="step-item" 
+           *ngFor="let step of steps; let i = index"
+           [class.active]="currentStep === i" 
+           [class.completed]="isStepCompleted(i)"
+           [class.accessible]="isStepAccessible(i)"
+           [class.disabled]="!isStepAccessible(i)"
+           (click)="selectStep(i)"
+           [title]="isStepAccessible(i) ? step.title : 'Complete previous steps to unlock'">
+        <div class="step-indicator">
+          <span class="step-number" *ngIf="!isStepCompleted(i)">{{ i + 1 }}</span>
+          <span class="step-check" *ngIf="isStepCompleted(i)">✓</span>
+        </div>
+        <div class="step-content">
+          <h3 class="step-title">{{ step.title }}</h3>
+          <p class="step-description">{{ step.description }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress Summary -->
+    <div class="progress-summary">
+      <div class="progress-text">Progress: {{ getCompletionPercentage() }}% Complete</div>
+      <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="getCompletionPercentage()"></div>
+      </div>
+      <div class="progress-percentage">{{ getCompletedStepsCount() }} of {{ getTotalSteps() }} steps completed</div>
+    </div>
+  </div>
+</div>

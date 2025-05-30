@@ -1,0 +1,270 @@
+<div class="customer-details-container">
+  <div class="page-header">
+    <h1 class="page-title">Customer Details</h1>
+    <p class="page-subtitle">Please provide your basic information to get started with the cybersecurity assessment</p>
+  </div>
+
+  <form [formGroup]="customerForm" class="customer-form" novalidate>
+    <!-- Company Information Section -->
+    <div class="form-section">
+      <h2 class="section-title">Company Information</h2>
+      
+      <div class="form-group">
+        <label for="companyLegalName" class="form-label">Company Legal Name</label>
+        <input 
+          type="text" 
+          id="companyLegalName"
+          formControlName="companyLegalName"
+          class="form-input"
+          [class.error]="hasError('companyLegalName')"
+          placeholder="Enter your company's legal name">
+        <div class="error-message" *ngIf="hasError('companyLegalName')">
+          {{ getErrorMessage('companyLegalName') }}
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="address" class="form-label">Address</label>
+        <textarea 
+          id="address"
+          formControlName="address"
+          class="form-input form-textarea"
+          [class.error]="hasError('address')"
+          placeholder="Enter your company's complete address"
+          rows="3"></textarea>
+        <div class="error-message" *ngIf="hasError('address')">
+          {{ getErrorMessage('address') }}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="phone" class="form-label">Phone</label>
+          <input 
+            type="tel" 
+            id="phone"
+            formControlName="phone"
+            class="form-input"
+            [class.error]="hasError('phone')"
+            placeholder="+1234567890">
+          <div class="error-message" *ngIf="hasError('phone')">
+            {{ getErrorMessage('phone') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email</label>
+          <input 
+            type="email" 
+            id="email"
+            formControlName="email"
+            class="form-input"
+            [class.error]="hasError('email')"
+            placeholder="company@example.com">
+          <div class="error-message" *ngIf="hasError('email')">
+            {{ getErrorMessage('email') }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Point of Contact Section -->
+    <div class="form-section">
+      <h2 class="section-title">Point of Contact</h2>
+      
+      <div class="form-group">
+        <label for="pocName" class="form-label">PoC Name</label>
+        <input 
+          type="text" 
+          id="pocName"
+          formControlName="pocName"
+          class="form-input"
+          [class.error]="hasError('pocName')"
+          placeholder="Enter point of contact name">
+        <div class="error-message" *ngIf="hasError('pocName')">
+          {{ getErrorMessage('pocName') }}
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="pocEmail" class="form-label">PoC Email</label>
+          <input 
+            type="email" 
+            id="pocEmail"
+            formControlName="pocEmail"
+            class="form-input"
+            [class.error]="hasError('pocEmail')"
+            placeholder="poc@example.com">
+          <div class="error-message" *ngIf="hasError('pocEmail')">
+            {{ getErrorMessage('pocEmail') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="pocPhone" class="form-label">PoC Phone/Mobile</label>
+          <input 
+            type="tel" 
+            id="pocPhone"
+            formControlName="pocPhone"
+            class="form-input"
+            [class.error]="hasError('pocPhone')"
+            placeholder="+1234567890">
+          <div class="error-message" *ngIf="hasError('pocPhone')">
+            {{ getErrorMessage('pocPhone') }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Business Information Section -->
+    <div class="form-section">
+      <h2 class="section-title">Business Information</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="businessNature" class="form-label">Business Nature</label>
+          <select 
+            id="businessNature"
+            formControlName="businessNature"
+            class="form-input form-select"
+            [class.error]="hasError('businessNature')">
+            <option value="">Select business nature</option>
+            <option value="manufacturing">Manufacturing</option>
+            <option value="services">Services</option>
+            <option value="retail">Retail</option>
+            <option value="wholesale">Wholesale</option>
+            <option value="technology">Technology</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="finance">Finance</option>
+            <option value="education">Education</option>
+            <option value="government">Government</option>
+            <option value="non-profit">Non-Profit</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="error-message" *ngIf="hasError('businessNature')">
+            {{ getErrorMessage('businessNature') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="industry" class="form-label">Industry</label>
+          <select 
+            id="industry"
+            formControlName="industry"
+            class="form-input form-select"
+            [class.error]="hasError('industry')">
+            <option value="">Select industry</option>
+            <option value="agriculture">Agriculture</option>
+            <option value="automotive">Automotive</option>
+            <option value="banking">Banking & Finance</option>
+            <option value="construction">Construction</option>
+            <option value="education">Education</option>
+            <option value="energy">Energy & Utilities</option>
+            <option value="healthcare">Healthcare</option>
+            <option value="hospitality">Hospitality</option>
+            <option value="insurance">Insurance</option>
+            <option value="manufacturing">Manufacturing</option>
+            <option value="media">Media & Entertainment</option>
+            <option value="pharmaceuticals">Pharmaceuticals</option>
+            <option value="real-estate">Real Estate</option>
+            <option value="retail">Retail</option>
+            <option value="technology">Technology</option>
+            <option value="telecommunications">Telecommunications</option>
+            <option value="transportation">Transportation</option>
+            <option value="other">Other</option>
+          </select>
+          <div class="error-message" *ngIf="hasError('industry')">
+            {{ getErrorMessage('industry') }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Organization Scale Section -->
+    <div class="form-section">
+      <h2 class="section-title">Organization Scale</h2>
+      
+      <div class="form-row">
+        <div class="form-group">
+          <label for="noOfLocations" class="form-label">No of locations</label>
+          <input 
+            type="number" 
+            id="noOfLocations"
+            formControlName="noOfLocations"
+            class="form-input"
+            [class.error]="hasError('noOfLocations')"
+            placeholder="1"
+            min="1">
+          <div class="error-message" *ngIf="hasError('noOfLocations')">
+            {{ getErrorMessage('noOfLocations') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="noOfEmployees" class="form-label">No of employees</label>
+          <input 
+            type="number" 
+            id="noOfEmployees"
+            formControlName="noOfEmployees"
+            class="form-input"
+            [class.error]="hasError('noOfEmployees')"
+            placeholder="10"
+            min="1">
+          <div class="error-message" *ngIf="hasError('noOfEmployees')">
+            {{ getErrorMessage('noOfEmployees') }}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="noOfSuppliers" class="form-label">No of suppliers</label>
+          <input 
+            type="number" 
+            id="noOfSuppliers"
+            formControlName="noOfSuppliers"
+            class="form-input"
+            [class.error]="hasError('noOfSuppliers')"
+            placeholder="0"
+            min="0">
+          <div class="error-message" *ngIf="hasError('noOfSuppliers')">
+            {{ getErrorMessage('noOfSuppliers') }}
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="noOfExternalPartners" class="form-label">No of external partners</label>
+          <input 
+            type="number" 
+            id="noOfExternalPartners"
+            formControlName="noOfExternalPartners"
+            class="form-input"
+            [class.error]="hasError('noOfExternalPartners')"
+            placeholder="0"
+            min="0">
+          <div class="error-message" *ngIf="hasError('noOfExternalPartners')">
+            {{ getErrorMessage('noOfExternalPartners') }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="form-actions">
+      <button 
+        type="button" 
+        class="btn btn-secondary"
+        (click)="onClearAll()">
+        Clear All
+      </button>
+      
+      <button 
+        type="button" 
+        class="btn btn-primary"
+        (click)="onSaveAndContinue()">
+        Save & Continue
+      </button>
+    </div>
+  </form>
+</div>

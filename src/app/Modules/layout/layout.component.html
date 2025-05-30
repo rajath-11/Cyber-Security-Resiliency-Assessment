@@ -1,0 +1,60 @@
+<div class="app-container">
+  <app-sidebar 
+    [currentStep]="currentStep" 
+    [completedSteps]="completedSteps"
+    (stepSelected)="onStepSelected($event)">
+  </app-sidebar>
+  
+  <div class="main-content">
+    <!-- Customer Details Component (Step 0) -->
+    <app-customer-details 
+      *ngIf="currentStep === 0"
+      (stepCompleted)="onStepCompleted($event.stepIndex, $event.data)">
+    </app-customer-details>
+    
+    <!-- Identify Component (Step 1) -->
+    <app-identify 
+      *ngIf="currentStep === 1"
+      (stepCompleted)="onStepCompleted($event.stepIndex, $event.data)"
+      (backRequested)="moveToPreviousStep()"
+      (clearRequested)="clearAllData()">
+    </app-identify>
+    
+    <!-- Placeholder for other steps -->
+    <div *ngIf="currentStep === 2" class="step-placeholder">
+      <h2>PROTECT (PR) Step</h2>
+      <p>This step is under development...</p>
+      <button (click)="moveToNextStep()">Continue to Next Step</button>
+    </div>
+    
+    <div *ngIf="currentStep === 3" class="step-placeholder">
+      <h2>DETECT (DE) Step</h2>
+      <p>This step is under development...</p>
+      <button (click)="moveToNextStep()">Continue to Next Step</button>
+    </div>
+    
+    <div *ngIf="currentStep === 4" class="step-placeholder">
+      <h2>RESPOND (RS) Step</h2>
+      <p>This step is under development...</p>
+      <button (click)="moveToNextStep()">Continue to Next Step</button>
+    </div>
+    
+    <div *ngIf="currentStep === 5" class="step-placeholder">
+      <h2>RECOVER (RC) Step</h2>
+      <p>This step is under development...</p>
+      <button (click)="moveToNextStep()">Continue to Next Step</button>
+    </div>
+    
+    <div *ngIf="currentStep === 6" class="step-placeholder">
+      <h2>Scorecard</h2>
+      <p>This step is under development...</p>
+      <button (click)="moveToNextStep()">Continue to Next Step</button>
+    </div>
+    
+    <div *ngIf="currentStep === 7" class="step-placeholder">
+      <h2>Pathway to Maturity</h2>
+      <p>This is the final step!</p>
+      <button (click)="currentStep = 0">Start Over</button>
+    </div>
+  </div>
+</div>
